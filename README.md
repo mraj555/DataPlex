@@ -1,54 +1,102 @@
-# 🫙 Contact Vault
+# 🚀 DataPlex Python Suite
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
-![CSV](https://img.shields.io/badge/Data-CSV-green.svg)
-![CLI](https://img.shields.io/badge/Type-CLI%20Application-orange.svg)
+![CLI](https://img.shields.io/badge/Type-CLI%20Applications-orange.svg)
 ![Storage](https://img.shields.io/badge/Storage-Local%20File-yellow.svg)
+![CSV](https://img.shields.io/badge/Data-CSV-green.svg)
+![Education](https://img.shields.io/badge/Purpose-Educational-red.svg)
 
 ## 📋 Overview
 
-**Contact Vault** is a sleek, command-line contact management system built with Python. This application provides a simple yet powerful interface for storing, viewing, and searching contact information with persistent CSV-based storage.
+**DataPlex** is a collection of sleek, command-line applications built with Python for managing contacts and student grades. Each application provides a simple yet powerful interface with persistent CSV-based storage and intuitive user experiences.
 
-## 🎯 Features
+## 🎯 Applications Overview
 
-| Feature | Description | Status |
-|---------|-------------|--------|
-| 📇 **Add Contacts** | Store name, mobile, and email with duplicate prevention | ✅ |
-| 📖 **View Contacts** | Display all contacts in a readable format | ✅ |
-| 🔍 **Search Contacts** | Find contacts by name (case-insensitive) | ✅ |
-| 💾 **Persistent Storage** | CSV-based data persistence | ✅ |
-| 🛡️ **Data Validation** | Duplicate name prevention | ✅ |
-| 🎨 **User-Friendly UI** | Clear menu with emoji indicators | ✅ |
+| Application | Purpose | Key Features | Status |
+|-----------|---------|--------------|--------|
+| 🫙 **Contact Vault** | Contact Management | Add, View, Search contacts | ✅ Complete |
+| � **Grade Insight** | Student Grade Analysis | Collect grades, Generate reports | ✅ Complete |
 
-## 🏗️ Architecture
+## 🏗️ Project Architecture
 
-### 📁 Project Structure
+### 📁 File Structure
 ```
 DataPlex/
-├── 📄 00_contact_vault.py    # Main application file
-├── 📄 contacts.csv          # Data storage (auto-created)
-└── 📄 README.md             # Documentation
+├── 🫙 00_contact_vault.py    # Contact management system
+├── 📊 01_grade_insight.py    # Student grade analyzer
+├── 📄 contacts.csv           # Contact storage (auto-generated)
+└── 📖 README.md              # Project documentation
 ```
 
-### 🔧 Core Components
+## 🫙 Contact Vault - Contact Management System
 
-#### 1. **Data Layer** (`contacts.csv`)
+### 🎯 Core Features
+- ✅ **Add Contacts** - Store name, mobile, and email with duplicate prevention
+- 📖 **View Contacts** - Display all contacts in a readable format
+- 🔍 **Search Contacts** - Find contacts by name (case-insensitive)
+- 💾 **Persistent Storage** - CSV-based data persistence
+- 🛡️ **Data Validation** - Duplicate name prevention
+- 🎨 **User-Friendly UI** - Clear menu with emoji indicators
+
+### � Technical Implementation
+
+#### **Data Layer** (`contacts.csv`)
 - **Format**: CSV with UTF-8 encoding
 - **Columns**: Name, Mobile No., Email ID
 - **Location**: Auto-created in project root
 
-#### 2. **Application Layer** (`00_contact_vault.py`)
+#### **Core Functions**
 
 | Function | Purpose | Key Features |
 |----------|---------|--------------|
-| `add_contact()` | Add new contacts | Duplicate detection, case-insensitive |
+| `add_contact()` | Add new contacts | Duplicate detection, case-insensitive validation |
 | `view_contacts()` | Display all contacts | Formatted output, empty state handling |
-| `search_contact()` | Search by name | Case-insensitive matching |
-| `main()` | CLI interface | Menu-driven navigation |
+| `search_contact()` | Search by name | Case-insensitive matching, emoji-enhanced display |
+| `main()` | CLI interface | Menu-driven navigation with match-case structure |
 
-## 🚀 Application Flow
+### 💡 Code Highlights
 
-### 📊 User Journey Diagram
+#### �️ Duplicate Prevention System
+```python
+def add_contact():
+    name = input("Name: ")
+    # Case-insensitive comparison to avoid duplicate names
+    with open(FILENAME, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if name.lower() == row["Name"].lower():
+                print("Contact already exists.")
+                return
+```
+
+#### 🎨 Enhanced Search Display
+```python
+def search_contact():
+    # Enhanced output with visual indicators
+    print(f"🙎 Name: {row['Name']} | 📱 Mobile No.: {row['Mobile No.']}")
+```
+
+#### 🎮 Interactive Menu System
+```python
+def main():
+    while True:
+        print("\n🫙 Contact Book:\n")
+        print("1. Add New Contact")
+        print("2. View All Contacts") 
+        print("3. Search Contact")
+        print("4. Exit")
+        print("---------------------------------------------------")
+        
+        choice = input("Enter your choice: ")
+        match choice:
+            case "1": add_contact()
+            case "2": view_contacts()
+            case "3": search_contact()
+            case "4": break
+```
+
+### 📊 Application Flow
+
 ```
 ┌─────────────────┐
 │   Start App     │
@@ -68,147 +116,195 @@ DataPlex/
     │         │         │         │
     ▼         ▼         ▼         ▼
 ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐
-│Get Input│ │Read CSV │ │Get Name │ │Goodbye! │
-│Validate │ │Display  │ │Search   │ │         │
-│Save Data│ │         │ │Show Results│     │
+│Validate │ │Read CSV │ │Get Name │ │Goodbye! │
+│Save Data│ │Display  │ │Search   │ │         │
 └─────────┘ └─────────┘ └─────────┘ └─────────┘
 ```
 
-### 🔄 Data Flow
+## � Grade Insight - Student Grade Analyzer
 
-#### Adding a Contact
-1. User selects **"Add New Contact"** (Option 1)
-2. System prompts for: Name, Mobile No., Email ID
-3. **Validation**: Checks for duplicate names (case-insensitive)
-4. **Storage**: Appends to CSV file if unique
-5. **Feedback**: Success/error message displayed
+### 🎯 Core Features
+- 📥 **Data Collection** - Interactive student grade input
+- 📈 **Statistical Analysis** - Calculate averages, highest/lowest marks
+- 🏆 **Performance Recognition** - Identify top performers and struggling students
+- 📋 **Detailed Reports** - Comprehensive grade summaries
+- 🛡️ **Input Validation** - Handle invalid inputs gracefully
 
-#### Viewing Contacts
-1. User selects **"View All Contacts"** (Option 2)
-2. System reads entire CSV file
-3. **Formatting**: Displays as `Name | Mobile No. | Email ID`
-4. **Empty State**: Shows "No contacts found" if empty
+### 🔧 Technical Implementation
 
-#### Searching Contacts
-1. User selects **"Search Contact"** (Option 3)
-2. System prompts for name to search
-3. **Matching**: Case-insensitive name comparison
-4. **Results**: Shows matching contact or "No contact found"
+#### **Data Storage**
+- **Format**: In-memory dictionary during runtime
+- **Structure**: `students = {"name": marks, ...}`
+- **Persistence**: Session-based (no file storage)
 
-## 💻 Code Highlights
+#### **Core Functions**
 
-### 🛡️ Duplicate Prevention
+| Function | Purpose | Key Features |
+|----------|---------|--------------|
+| `collect_students_data()` | Interactive data collection | Duplicate prevention, input validation, 'done' termination |
+| `display_students_report()` | Comprehensive report generation | Statistics calculation, formatted output, performance analysis |
+
+### � Code Highlights
+
+#### 🛡️ Input Validation & Duplicate Prevention
 ```python
-def add_contact():
-    name = input("Name: ")
-    # Case-insensitive comparison to avoid duplicate names
-    with open(FILENAME, "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if name.lower() == row["Name"].lower():
-                print("Contact already exists.")
-                return
-```
-
-### 📋 Contact Display Format
-```python
-def view_contacts():
-    # Pretty formatting with separators
-    for row in rows:
-        print(f"{row[0]} | {row[1]} | {row[2]}")
-```
-
-### 🔍 Smart Search with Emoji
-```python
-def search_contact():
-    # Enhanced output with visual indicators
-    print(f"🙎 Name: {row['Name']} | 📱 Mobile No.: {row['Mobile No.']}")
-```
-
-### 🎮 Interactive Menu System
-```python
-def main():
+def collect_students_data():
     while True:
-        print("\n🫙 Contact Book:\n")
-        print("1. Add New Contact")
-        print("2. View All Contacts") 
-        print("3. Search Contact")
-        print("4. Exit")
-        print("---------------------------------------------------")
+        name = input("Enter student name (or 'done' to finish): ")
         
-        choice = input("Enter your choice: ")
-        match choice:
-            case "1": add_contact()
-            case "2": view_contacts()
-            case "3": search_contact()
-            case "4": break
+        if name.lower() == "done":
+            break
+        # Check if the student has already been entered
+        if name in students:
+            print("Student already exists.")
+            continue
 ```
 
-## 📊 Data Management
+#### � Statistical Analysis & Report Generation
+```python
+def display_students_report(students):
+    # Extract all marks into a list for easy calculation
+    marks = list(students.values())
+    highest_marks = max(marks)
+    lowest_marks = min(marks)
+    average_marks = sum(marks) / len(marks)
+    
+    # Find all students who achieved the highest and lowest marks
+    topper = [name for name, score in students.items() if score == highest_marks]
+    lower = [name for name, score in students.items() if score == lowest_marks]
+```
 
-### CSV Structure
+#### 📋 Professional Report Formatting
+```python
+print("-" * 50)
+print(" Student Report Card 📇 ")
+print(f"Total Number of Students: {len(students)}")
+print(f"Average Marks of Students: {average_marks:.2f}")
+print(f"Highest Marks: {highest_marks:.2f} by {', '.join(topper)}")
+print(f"Lowest Marks: {lowest_marks:.2f} by {', '.join(lower)}")
+print("-" * 50)
+```
+
+### 📊 Application Flow
+
+```
+┌─────────────────┐
+│   Start App     │
+└─────────┬───────┘
+          │
+          ▼
+┌─────────────────────────────┐
+│  Collect Student Data       │
+│  📥 Interactive Input Loop    │
+└─────────┬───────────────────┘
+          │
+          ▼
+┌─────────────────────────────┐
+│  Generate Report             │
+│  📊 Statistics + Analysis   │
+└─────────┬───────────────────┘
+          │
+          ▼
+┌─────────────────┐
+│   Display Results│
+│   📋 Full Report │
+└─────────────────┘
+```
+
+## � Getting Started
+
+### Prerequisites
+- **Python 3.x** installed on your system
+- **No external dependencies** required (uses standard library only)
+
+### Running the Applications
+
+#### Contact Vault
+```bash
+python 00_contact_vault.py
+```
+
+#### Grade Insight
+```bash
+python 01_grade_insight.py
+```
+
+## 📈 Technical Specifications
+
+| Aspect | Contact Vault | Grade Insight |
+|--------|---------------|---------------|
+| **Language** | Python 3.x | Python 3.x |
+| **Storage** | CSV File | In-memory Dictionary |
+| **Encoding** | UTF-8 | UTF-8 |
+| **Interface** | Command Line | Command Line |
+| **Dependencies** | Standard Library Only | Standard Library Only |
+| **Platform** | Cross-platform | Cross-platform |
+
+## 🎨 User Experience Features
+
+### Visual Enhancements
+- 📱 **Emojis**: Visual indicators (`🫙`, `�`, `�🙎`, `📱`)
+- 📋 **Clear Formatting**: Consistent separators and spacing
+- 🎯 **Intuitive Menus**: Numbered options with clear labels
+- ⚡ **Quick Feedback**: Immediate response to user actions
+
+### Input Validation
+- ✅ **Duplicate Detection**: Prevents identical entries
+- 🔤 **Case-Insensitive**: Smart string comparison
+- �️ **Error Handling**: Graceful handling of invalid inputs
+- � **Flexible Formats**: Accepts various input formats
+
+## � Data Management
+
+### Contact Vault CSV Structure
 ```csv
 Name,Mobile No.,Email ID
 John Doe,1234567890,john@example.com
 Jane Smith,0987654321,jane@example.com
 ```
 
-### File Handling Strategy
-- **Auto-creation**: Creates `contacts.csv` on first run
-- **UTF-8 Encoding**: Supports international characters
-- **Append Mode**: Preserves existing data when adding
-- **Error Handling**: Graceful file operations
+### Grade Insight Data Flow
+```python
+# Input Collection
+students = {
+    "Alice": 85.5,
+    "Bob": 92.0,
+    "Charlie": 78.5
+}
 
-## 🎨 User Experience Features
+# Report Generation
+# Average: 85.33
+# Highest: 92.0 (Bob)
+# Lowest: 78.5 (Charlie)
+```
 
-### Visual Enhancements
-- 📱 **Emojis**: Visual indicators (`🫙`, `🙎`, `📱`)
-- 📋 **Clear Formatting**: Consistent separators and spacing
-- 🎯 **Intuitive Menu**: Numbered options with clear labels
-- ⚡ **Quick Feedback**: Immediate response to user actions
+## 🌟 Key Strengths
 
-### Input Validation
-- ✅ **Duplicate Detection**: Prevents identical names
-- 🔤 **Case-Insensitive**: "John" and "john" treated as same
-- 📧 **Flexible Email**: Accepts any email format
-- 📱 **Phone Format**: Accepts any mobile number format
+1. **🛡️ Robust Error Handling** - Both applications handle edge cases gracefully
+2. **📱 User-Friendly Interface** - Clear prompts and intuitive navigation
+3. **� Data Persistence** - Contact Vault maintains data between sessions
+4. **📊 Comprehensive Analysis** - Grade Insight provides detailed statistics
+5. **🚀 Zero Dependencies** - Pure Python standard library implementation
+6. **🎨 Professional Presentation** - Clean formatting and visual enhancements
 
-## 🚀 Getting Started
+## � Future Enhancements
 
-1. **Run the Application**:
-   ```bash
-   python 00_contact_vault.py
-   ```
-
-2. **Navigate the Menu**: Use number keys (1-4) to select options
-
-3. **Add Your First Contact**: Select option 1 and follow prompts
-
-4. **Explore Features**: Try viewing, searching, and adding more contacts
-
-## 🔧 Technical Specifications
-
-| Aspect | Details |
-|--------|---------|
-| **Language** | Python 3.x |
-| **Storage** | CSV File |
-| **Encoding** | UTF-8 |
-| **Interface** | Command Line |
-| **Dependencies** | Standard Library Only |
-| **Platform** | Cross-platform |
-
-## 📈 Future Enhancements
-
-Potential improvements for the Contact Vault:
-
+### Contact Vault Potential Improvements
 - 🎨 **Color-coded output** with terminal colors
 - 📤 **Export functionality** (JSON, XML formats)
 - 🔢 **Contact editing and deletion**
 - 📊 **Statistics dashboard** (total contacts, most used domains)
 - 🔐 **Password protection** for sensitive contacts
-- ☁️ **Cloud sync** capabilities
-- 📱 **Mobile app version**
+
+### Grade Insight Potential Improvements
+- 📈 **Grade trend analysis** over time
+- 📊 **Visual charts and graphs**
+- 💾 **Data export** to CSV/Excel
+- 🎯 **Grade prediction** algorithms
+- 📱 **Mobile-friendly interface**
 
 ---
 
 *Built with ❤️ using Python's standard library - No external dependencies required!*
+
+**🎯 Perfect for educational purposes, personal productivity, and learning Python CLI development!**
