@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Dil Ke Safar",
+    "genre": "Romantic Drama",
+    "rating": 8.1
+  },
+  {
+    "title": "Mumbai Nights",
+    "genre": "Action / Crime",
+    "rating": 7.4
+  },
+  {
+    "title": "Chandni Bazaar",
+    "genre": "Musical / Family",
+    "rating": 8.6
+  },
+  {
+    "title": "Khoj: The Hunt",
+    "genre": "Thriller / Mystery",
+    "rating": 7.9
+  },
+  {
+    "title": "Zindagi Express",
+    "genre": "Comedy / Adventure",
+    "rating": 7.2
+  }
+]

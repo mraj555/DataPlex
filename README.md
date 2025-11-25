@@ -2,20 +2,21 @@
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
 ![CLI](https://img.shields.io/badge/Type-CLI%20Applications-orange.svg)
-![Storage](https://img.shields.io/badge/Storage-Local%20File-yellow.svg)
-![CSV](https://img.shields.io/badge/Data-CSV-green.svg)
+![Storage](https://img.shields.io/badge/Storage-CSV%20%26%20JSON-yellow.svg)
+![Database](https://img.shields.io/badge/Database-Local%20File%20Storage-green.svg)
 ![Education](https://img.shields.io/badge/Purpose-Educational-red.svg)
 
 ## 📋 Overview
 
-**DataPlex** is a collection of sleek, command-line applications built with Python for managing contacts and student grades. Each application provides a simple yet powerful interface with persistent CSV-based storage and intuitive user experiences.
+**DataPlex** is a collection of sleek, command-line applications built with Python for managing contacts, student grades, and movie collections. Each application provides a simple yet powerful interface with persistent storage and intuitive user experiences.
 
 ## 🎯 Applications Overview
 
 | Application | Purpose | Key Features | Status |
 |-----------|---------|--------------|--------|
 | 🫙 **Contact Vault** | Contact Management | Add, View, Search contacts | ✅ Complete |
-| � **Grade Insight** | Student Grade Analysis | Collect grades, Generate reports | ✅ Complete |
+| 📊 **Grade Insight** | Student Grade Analysis | Collect grades, Generate reports | ✅ Complete |
+| 🎬 **Cine Archive** | Movie Collection Manager | Add, View, Search movies | ✅ Complete |
 
 ## 🏗️ Project Architecture
 
@@ -24,7 +25,9 @@
 DataPlex/
 ├── 🫙 00_contact_vault.py    # Contact management system
 ├── 📊 01_grade_insight.py    # Student grade analyzer
+├── 🎬 02_cine_archieve.py    # Movie collection manager
 ├── 📄 contacts.csv           # Contact storage (auto-generated)
+├── 📄 movies.json            # Movie database (auto-generated)
 └── 📖 README.md              # Project documentation
 ```
 
@@ -38,7 +41,7 @@ DataPlex/
 - 🛡️ **Data Validation** - Duplicate name prevention
 - 🎨 **User-Friendly UI** - Clear menu with emoji indicators
 
-### � Technical Implementation
+### 🔧 Technical Implementation
 
 #### **Data Layer** (`contacts.csv`)
 - **Format**: CSV with UTF-8 encoding
@@ -56,7 +59,7 @@ DataPlex/
 
 ### 💡 Code Highlights
 
-#### �️ Duplicate Prevention System
+#### 🛡️ Duplicate Prevention System
 ```python
 def add_contact():
     name = input("Name: ")
@@ -95,33 +98,7 @@ def main():
             case "4": break
 ```
 
-### 📊 Application Flow
-
-```
-┌─────────────────┐
-│   Start App     │
-└─────────┬───────┘
-          │
-          ▼
-┌─────────────────┐
-│  Main Menu      │
-│  🫙 Contact Book │
-└─────────┬───────┘
-          │
-    ┌─────┴─────┬─────────┬─────────┐
-    ▼         ▼         ▼         ▼
-┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
-│Add (1)│ │View(2)│ │Search│ │Exit (4)│
-└───┬───┘ └───┬───┘ └───┬───┘ └───┬───┘
-    │         │         │         │
-    ▼         ▼         ▼         ▼
-┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐
-│Validate │ │Read CSV │ │Get Name │ │Goodbye! │
-│Save Data│ │Display  │ │Search   │ │         │
-└─────────┘ └─────────┘ └─────────┘ └─────────┘
-```
-
-## � Grade Insight - Student Grade Analyzer
+## 📊 Grade Insight - Student Grade Analyzer
 
 ### 🎯 Core Features
 - 📥 **Data Collection** - Interactive student grade input
@@ -144,7 +121,7 @@ def main():
 | `collect_students_data()` | Interactive data collection | Duplicate prevention, input validation, 'done' termination |
 | `display_students_report()` | Comprehensive report generation | Statistics calculation, formatted output, performance analysis |
 
-### � Code Highlights
+### 📊 Code Highlights
 
 #### 🛡️ Input Validation & Duplicate Prevention
 ```python
@@ -160,7 +137,7 @@ def collect_students_data():
             continue
 ```
 
-#### � Statistical Analysis & Report Generation
+#### 📈 Statistical Analysis & Report Generation
 ```python
 def display_students_report(students):
     # Extract all marks into a list for easy calculation
@@ -185,8 +162,121 @@ print(f"Lowest Marks: {lowest_marks:.2f} by {', '.join(lower)}")
 print("-" * 50)
 ```
 
-### 📊 Application Flow
+## 🎬 Cine Archive - Movie Collection Manager
 
+### 🎯 Core Features
+- 🎞️ **Add Movies** - Store title, genre, and rating with duplicate prevention
+- 📺 **View Collection** - Display all movies in formatted list
+- 🔍 **Smart Search** - Search by title or genre (partial, case-insensitive)
+- 💾 **JSON Storage** - Persistent movie database
+- ⭐ **Rating Validation** - Ensure ratings are between 0-10
+- 🎭 **Rich Display** - Emoji-enhanced movie listings
+
+### 🔧 Technical Implementation
+
+#### **Data Layer** (`movies.json`)
+- **Format**: JSON with UTF-8 encoding
+- **Structure**: Array of movie objects with title, genre, rating
+- **Location**: Auto-created in project root
+- **Sample Data**:
+```json
+[
+  {
+    "title": "Dil Ke Safar",
+    "genre": "Romantic Drama",
+    "rating": 8.1
+  }
+]
+```
+
+#### **Core Functions**
+
+| Function | Purpose | Key Features |
+|----------|---------|--------------|
+| `load_movies()` | Load movie database | JSON file reading, error handling |
+| `save_movie()` | Persist movie data | JSON file writing with formatting |
+| `add_movie()` | Add new movies | Duplicate detection, rating validation |
+| `view_movies()` | Display collection | Formatted output with emojis |
+| `search_movie()` | Smart search | Partial matching, case-insensitive |
+| `run_movie_db()` | Main interface | Menu-driven navigation |
+
+### 🎬 Code Highlights
+
+#### 🛡️ Duplicate Prevention & Rating Validation
+```python
+def add_movie(movies):
+    title = input("Enter Movie Title: ").strip()
+    
+    # Prevent duplicate titles (case-insensitive check)
+    if any(movie["title"].lower() == title.lower() for movie in movies):
+        print("Movie with this title already exists.")
+        return
+    
+    # Validate rating: must be a number between 0 and 10
+    try:
+        rating = float(input("Enter Movie Rating (0-10): ").strip())
+        if not (0 <= rating <= 10):
+            raise ValueError
+    except ValueError:
+        print("Invalid Rating. Please enter a number between 0-10.")
+        return
+```
+
+#### 🎭 Rich Display Formatting
+```python
+def view_movies(movies):
+    if not movies:
+        print("No Movies Found.")
+        return
+    print("-" * 40)
+    print("🍿 Movie Database 🍿")
+    for movie in movies:
+        print(f"🎬 {movie['title']} | 🎭 {movie['genre']} | ⭐ {movie['rating']}")
+    print("-" * 40)
+```
+
+#### 🔍 Smart Search Implementation
+```python
+def search_movie(movies):
+    search_term = input("Enter Title or Genre to Search: ").strip()
+    
+    # Collect movies whose title or genre contains the search term
+    results = [
+        movie
+        for movie in movies
+        if search_term.lower() in movie["title"].lower()
+        or search_term.lower() in movie["genre"].lower()
+    ]
+```
+
+## 📊 Application Flow Diagrams
+
+### 🫙 Contact Vault Flow
+```
+┌─────────────────┐
+│   Start App     │
+└─────────┬───────┘
+          │
+          ▼
+┌─────────────────┐
+│  Main Menu      │
+│  🫙 Contact Book │
+└─────────┬───────┘
+          │
+    ┌─────┴─────┬─────────┬─────────┐
+    ▼         ▼         ▼         ▼
+┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
+│Add (1)│ │View(2)│ │Search│ │Exit (4)│
+└───┬───┘ └───┬───┘ └───┬───┘ └───┬───┘
+    │         │         │         │
+    ▼         ▼         ▼         ▼
+┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐
+│Validate │ │Read CSV │ │Get Name │ │Goodbye! │
+│Save Data│ │Display  │ │Search   │ │         │
+└─────────┘ └─────────┘ └─────────┘ └─────────┘
+```
+
+### 📊 Grade Insight Flow
 ```
 ┌─────────────────┐
 │   Start App     │
@@ -195,13 +285,13 @@ print("-" * 50)
           ▼
 ┌─────────────────────────────┐
 │  Collect Student Data       │
-│  📥 Interactive Input Loop    │
+│  📥 Interactive Input Loop  │
 └─────────┬───────────────────┘
           │
           ▼
 ┌─────────────────────────────┐
-│  Generate Report             │
-│  📊 Statistics + Analysis   │
+│  Generate Report            │
+│  📊 Statistics + Analysis │
 └─────────┬───────────────────┘
           │
           ▼
@@ -211,7 +301,37 @@ print("-" * 50)
 └─────────────────┘
 ```
 
-## � Getting Started
+### 🎬 Cine Archive Flow
+```
+┌─────────────────┐
+│   Start App     │
+└─────────┬───────┘
+          │
+          ▼
+┌─────────────────────────────┐
+│  Load Movie Database        │
+│  📄 Read movies.json        │
+└─────────┬───────────────────┘
+          │
+          ▼
+┌─────────────────┐
+│  Main Menu      │
+└─────────┬───────┘
+          │
+    ┌─────┴─────┬─────────┬─────────┐
+    ▼         ▼         ▼         ▼
+┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
+│Add (1)│ │View(2)│ │Search│ │Exit (4)│
+└───┬───┘ └───┬───┘ └───┬───┘ └───┬───┘
+    │         │         │         │
+    ▼         ▼         ▼         ▼
+┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐
+│Validate │ │Display  │ │Search   │ │Save &   │
+│Save JSON│ │Movies   │ │Database │ │Exit     │
+└─────────┘ └─────────┘ └─────────┘ └─────────┘
+```
+
+## 🚀 Getting Started
 
 ### Prerequisites
 - **Python 3.x** installed on your system
@@ -229,21 +349,26 @@ python 00_contact_vault.py
 python 01_grade_insight.py
 ```
 
+#### Cine Archive
+```bash
+python 02_cine_archieve.py
+```
+
 ## 📈 Technical Specifications
 
-| Aspect | Contact Vault | Grade Insight |
-|--------|---------------|---------------|
-| **Language** | Python 3.x | Python 3.x |
-| **Storage** | CSV File | In-memory Dictionary |
-| **Encoding** | UTF-8 | UTF-8 |
-| **Interface** | Command Line | Command Line |
-| **Dependencies** | Standard Library Only | Standard Library Only |
-| **Platform** | Cross-platform | Cross-platform |
+| Aspect | Contact Vault | Grade Insight | Cine Archive |
+|--------|---------------|---------------|--------------|
+| **Language** | Python 3.x | Python 3.x | Python 3.x |
+| **Storage** | CSV File | In-memory Dictionary | JSON File |
+| **Encoding** | UTF-8 | UTF-8 | UTF-8 |
+| **Interface** | Command Line | Command Line | Command Line |
+| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only |
+| **Platform** | Cross-platform | Cross-platform | Cross-platform |
 
 ## 🎨 User Experience Features
 
 ### Visual Enhancements
-- 📱 **Emojis**: Visual indicators (`🫙`, `�`, `�🙎`, `📱`)
+- 📱 **Emojis**: Visual indicators (`🫙`, `📊`, `🎬`, `🙎`, `📱`, `🍿`, `🎭`, `⭐`)
 - 📋 **Clear Formatting**: Consistent separators and spacing
 - 🎯 **Intuitive Menus**: Numbered options with clear labels
 - ⚡ **Quick Feedback**: Immediate response to user actions
@@ -251,10 +376,10 @@ python 01_grade_insight.py
 ### Input Validation
 - ✅ **Duplicate Detection**: Prevents identical entries
 - 🔤 **Case-Insensitive**: Smart string comparison
-- �️ **Error Handling**: Graceful handling of invalid inputs
-- � **Flexible Formats**: Accepts various input formats
+- ⚠️ **Error Handling**: Graceful handling of invalid inputs
+- 🔄 **Flexible Formats**: Accepts various input formats
 
-## � Data Management
+## 📊 Data Management
 
 ### Contact Vault CSV Structure
 ```csv
@@ -278,30 +403,48 @@ students = {
 # Lowest: 78.5 (Charlie)
 ```
 
+### Cine Archive JSON Structure
+```json
+[
+  {
+    "title": "Dil Ke Safar",
+    "genre": "Romantic Drama",
+    "rating": 8.1
+  },
+  {
+    "title": "Mumbai Nights",
+    "genre": "Action / Crime",
+    "rating": 7.4
+  }
+]
+```
+
 ## 🌟 Key Strengths
 
-1. **🛡️ Robust Error Handling** - Both applications handle edge cases gracefully
+1. **🛡️ Robust Error Handling** - All applications handle edge cases gracefully
 2. **📱 User-Friendly Interface** - Clear prompts and intuitive navigation
-3. **� Data Persistence** - Contact Vault maintains data between sessions
+3. **💾 Data Persistence** - Contact Vault and Cine Archive maintain data between sessions
 4. **📊 Comprehensive Analysis** - Grade Insight provides detailed statistics
 5. **🚀 Zero Dependencies** - Pure Python standard library implementation
 6. **🎨 Professional Presentation** - Clean formatting and visual enhancements
+7. **🔍 Smart Search** - Cine Archive offers partial matching capabilities
+8. **⭐ Input Validation** - Rating validation in Cine Archive (0-10 range)
 
-## � Future Enhancements
+## � Educational Value
 
-### Contact Vault Potential Improvements
-- 🎨 **Color-coded output** with terminal colors
-- 📤 **Export functionality** (JSON, XML formats)
-- 🔢 **Contact editing and deletion**
-- 📊 **Statistics dashboard** (total contacts, most used domains)
-- 🔐 **Password protection** for sensitive contacts
+### Learning Outcomes
+- 📚 **File I/O Operations** - CSV and JSON file handling
+- � **Data Structures** - Dictionaries, lists, and arrays
+- �️ **Error Handling** - Try-catch blocks and validation
+- 🎮 **CLI Development** - Menu-driven interfaces
+- � **Data Persistence** - File-based storage systems
+- � **Search Algorithms** - Case-insensitive partial matching
 
-### Grade Insight Potential Improvements
-- 📈 **Grade trend analysis** over time
-- 📊 **Visual charts and graphs**
-- 💾 **Data export** to CSV/Excel
-- 🎯 **Grade prediction** algorithms
-- 📱 **Mobile-friendly interface**
+### Code Quality Features
+- � **Clear Documentation** - Comprehensive docstrings
+- 🏗️ **Modular Design** - Separate functions for each feature
+- � **Consistent Patterns** - Similar structure across applications
+- 🎯 **Single Responsibility** - Each function has one clear purpose
 
 ---
 
