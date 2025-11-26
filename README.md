@@ -6,10 +6,11 @@
 ![Database](https://img.shields.io/badge/Database-Local%20File%20Storage-green.svg)
 ![Education](https://img.shields.io/badge/Purpose-Educational-red.svg)
 ![Visualization](https://img.shields.io/badge/Features-Data%20Visualization-purple.svg)
+![Security](https://img.shields.io/badge/Security-Encryption%20%26%20Base64-blue.svg)
 
 ## 📋 **Overview**
 
-**DataPlex** is a comprehensive collection of sleek, command-line applications built with Python for managing contacts, student grades, movies, weather data, and data visualization. Each application provides a simple yet powerful interface with persistent storage and intuitive user experiences.
+**DataPlex** is a comprehensive collection of sleek, command-line applications built with Python for managing contacts, student grades, movies, weather data, data visualization, format conversion, and secure credential storage. Each application provides a simple yet powerful interface with persistent storage and intuitive user experiences.
 
 ## 🎯 **Applications Overview**
 
@@ -24,6 +25,7 @@
 | 🔄 **CSV 2 JSON** | Data Format Converter | Convert CSV to JSON | ✅ Complete |
 | 🔧 **JSON Simplify** | JSON Flattener | Flatten nested JSON structures | ✅ Complete |
 | 🔐 **Pass Fort** | Password Manager | Store credentials securely | ✅ Complete |
+| 📝 **Sym Shield** | Secure Notes Manager | Encrypt/decrypt notes | ✅ Complete |
 
 ## 🏗️ **Project Architecture**
 
@@ -38,12 +40,16 @@ DataPlex/
 ├── 🔄 05_json_2_csv.py       # JSON to CSV converter
 ├── 🔄 06_csv_2_json.py       # CSV to JSON converter
 ├── 🔧 07_json_simplify.py    # JSON flattening utility
-├── � 08_pass_fort.py        # Password manager
-├── �📄 contacts.csv           # Contact storage (auto-generated)
+├── 🔐 08_pass_fort.py        # Password manager
+├── 📝 09_sym_shield.py       # Secure notes manager
+├── 📄 contacts.csv           # Contact storage (auto-generated)
 ├── 📄 movies.json            # Movie database (auto-generated)
 ├── 📄 weather.csv            # Weather logs (auto-generated)
 ├── 📄 api_data.json          # Sample API data for converter
 ├── 📄 nested_data.json       # Sample nested JSON data
+├── 📄 notes.json             # Encrypted notes storage
+├── 🔑 vault.key              # Encryption key for notes
+├── 📄 vault.txt              # Base64 encoded credentials
 └── 📖 README.md              # Project documentation
 ```
 
@@ -468,12 +474,12 @@ def flatten_json(data, parent_key="", sep="_"):
             items.update(flatten_json(v, full_key, sep=sep))
 ```
 
-## � **Pass Fort - Password Manager**
+## 🔐 **Pass Fort - Password Manager**
 
 ### 🎯 **Core Features**
 - 🔐 **Credential Storage** - Store website credentials securely
 - 🔒 **Base64 Encoding** - Light obfuscation for password protection
-- �📊 **Password Strength** - Analyze and display password strength
+- 📊 **Password Strength** - Analyze and display password strength
 - 💾 **Vault Storage** - Persistent credential storage in text file
 
 ### 🔧 **Technical Implementation**
@@ -518,7 +524,52 @@ def password_strength(password):
         strength += 1
 ```
 
-## 📊 **Application Flow Diagrams**
+## 📝 **Sym Shield - Secure Notes Manager**
+
+### 🎯 **Core Features**
+- 🔐 **Note Encryption** - Store notes with Fernet symmetric encryption
+- 📝 **Note Management** - Add, view, and manage encrypted notes
+- 🔑 **Key Management** - Automatic key generation and storage
+- 💾 **Persistent Storage** - JSON-based encrypted note storage
+- 📅 **Timestamp Tracking** - Record creation dates for notes
+
+### � **Technical Implementation**
+
+#### **Data Storage**
+- **Format**: JSON file with Fernet encrypted content
+- **Files**: `notes.json` (encrypted notes), `vault.key` (encryption key)
+- **Security**: Fernet symmetric encryption (cryptographically secure)
+
+#### **Core Functions**
+
+| Function | Purpose | Key Features |
+|----------|---------|--------------|
+| `load_or_generate_key()` | Key management | Fernet key generation and storage |
+| `add_note()` | Create encrypted notes | Fernet encryption with timestamps |
+| `view_notes()` | Display decrypted notes | Fernet decryption, formatted output |
+| `delete_note()` | Remove notes | Index-based deletion with validation |
+
+#### 🔐 **Encryption Implementation**
+```python
+def load_or_generate_key():
+    """
+    Load the encryption key from disk if it exists; otherwise generate a new one and save it.
+    Returns a Fernet instance ready for encryption/decryption.
+    """
+    if not os.path.exists(KEY_FILE):
+        # Generate a fresh symmetric key and save it to disk
+        key = Fernet.generate_key()
+        with open(KEY_FILE, "wb") as f:
+            f.write(key)
+    else:
+        # Read the existing key from disk
+        with open(KEY_FILE, "rb") as f:
+            key = f.read()
+
+    return Fernet(key)
+```
+
+## �📊 **Application Flow Diagrams**
 
 ### 🫙 **Contact Vault Flow**
 ```
@@ -552,135 +603,192 @@ def password_strength(password):
 └─────────┬───────┘
           │
           ▼
-┌─────────────────────────────┐
-│  Collect Student Data       │
-│  📥 Interactive Input Loop  │
-└─────────┬───────────────────┘
-          │
-          ▼
-┌─────────────────────────────┐
-│  Generate Report            │
-│  📊 Statistics + Analysis   │
-└─────────┬───────────────────┘
+┌─────────────────┐
+│  Data Collection│
+│  📥 Enter Grades │
+└─────────┬───────┘
           │
           ▼
 ┌─────────────────┐
-│   Display Results│
-│   📋 Full Report │
+│  Process Data   │
+│  📈 Calculate   │
+│  Statistics     │
+└─────────┬───────┘
+          │
+          ▼
+┌─────────────────┐
+│  Generate Report│
+│  📋 Display     │
+│  Summary        │
 └─────────────────┘
 ```
 
-### 🎬 **Cine Archive Flow**
+### 🔐 **Security Architecture**
+
+| Application | Security Level | Method | Purpose |
+|-------------|----------------|---------|---------|
+| **Pass Fort** | Light Obfuscation | Base64 Encoding | Credential storage |
+| **Sym Shield** | Strong Encryption | Fernet (AES 128) | Note encryption |
+| **All Apps** | Data Validation | Input Sanitization | Prevent errors |
+
+## �️ **Technical Dependencies**
+
+### 📦 **Core Libraries**
 ```
-┌─────────────────┐
-│   Start App     │
-└─────────┬───────┘
-          │
-          ▼
-┌─────────────────────────────┐
-│  Load Movie Database        │
-│  📄 Read movies.json        │
-└─────────┬───────────────────┘
-          │
-          ▼
-┌─────────────────┐
-│  Main Menu      │
-└─────────┬───────┘
-          │
-    ┌─────┴─────┬─────────┬─────────┐
-    ▼         ▼         ▼         ▼
-┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐
-│Add (1)│ │View(2)│ │Search│ │Exit (4)│
+certifi==2025.11.12          # SSL certificate verification
+chardet==3.0.4               # Character encoding detection
+idna==2.10                   # Internationalized domain names
+requests==2.25.1             # HTTP library for API calls
+matplotlib==3.3.4            # Data visualization
+numpy==1.19.5                # Numerical computing
+cryptography==3.4.8          # Encryption algorithms
 ```
+
+### 🔧 **Built-in Modules**
+- `csv` - CSV file handling
+- `json` - JSON processing
+- `os` - Operating system interface
+- `datetime` - Date and time operations
+- `base64` - Base64 encoding/decoding
+- `collections` - Specialized container datatypes
 
 ## 🚀 **Getting Started**
 
-### 📋 **Prerequisites**
-- 🐍 **Python 3.x** - Latest version recommended
-- 📦 **Standard Libraries** - All dependencies are built-in
-- 🌐 **Internet Connection** - Required for Weather Logger API
+### ⚡ **Quick Start**
+1. **Choose your application**: Each `.py` file is a standalone CLI tool
+2. **Run the script**: `python 00_contact_vault.py` (or any other app)
+3. **Follow the prompts**: Each app has intuitive menu-driven navigation
+4. **Data persists automatically**: All data is saved to local files
 
-### 🎯 **Quick Start**
-1. **Clone/Download** the project files
-2. **Navigate** to the project directory
-3. **Run any application** directly:
-   ```bash
-   python 00_contact_vault.py
-   python 01_grade_insight.py
-   python 02_cine_archieve.py
-   # ... and so on
-   ```
+### 🔑 **API Configuration**
+- **Weather Logger**: Replace `"Enter your OpenWeatherMap API key here"` with your actual API key
+- **All other apps**: Work out-of-the-box with local file storage
 
-### 🔧 **Weather Logger Setup**
-- **Get API Key** from [OpenWeatherMap](https://openweathermap.org/api)
-- **Replace** `"Enter your OpenWeatherMap API key here"` in `03_temp_trail.py`
-- **Run** the weather logger application
+## 💡 **Usage Examples**
 
-## 🎨 **User Experience Features**
+### 🫙 **Contact Vault**
+```bash
+$ python 00_contact_vault.py
+🫙 Contact Book:
+1. Add New Contact
+2. View All Contacts
+3. Search Contact
+4. Exit
+---------------------------------------------------
+Enter your choice: 1
+Name: John Doe
+Mobile No.: +1234567890
+Email ID: john@example.com
+Contact added successfully.
+```
 
-### 🌈 **Visual Enhancements**
-- 📱 **Emoji Indicators** - Intuitive visual cues
-- 🎨 **Colorful Output** - Enhanced readability
-- 📊 **Formatted Tables** - Clean data presentation
-- 🎯 **Clear Navigation** - Simple menu systems
+### � **Grade Insight**
+```bash
+$ python 01_grade_insight.py
+Enter student name (or 'done' to finish): Alice
+Enter the marks for Alice: 95
+Enter student name (or 'done' to finish): Bob
+Enter the marks for Bob: 87
+Enter student name (or 'done' to finish): done
+--------------------------------------------------
+ Student Report Card 📇 
+Total Number of Students: 2
+Average Marks of Students: 91.00
+Highest Marks: 95.00 by Alice
+Lowest Marks: 87.00 by Bob
+--------------------------------------------------
+```
+
+### 🌤️ **Weather Logger**
+```bash
+$ python 03_temp_trail.py
+🌤️ Weather Logger
+1. Log Weather
+2. View Logs
+3. Exit
+Enter your choice: 1
+Enter your city name: London
+🌤️ Temperature in London on 2025-11-26: 12.5°C — Clouds 🌈
+Weather data logged successfully.
+```
+
+## 🎨 **Visual Features**
+
+### 📊 **Chart Generation**
+- **Line Charts**: Temperature trends over time
+- **Bar Charts**: Weather condition frequency analysis
+- **Interactive Elements**: Zoom, pan, save charts
+- **Professional Styling**: Grid lines, markers, proper labels
+
+### 🎭 **Emoji Integration**
+- 🫙 Contact book with contact emojis
+- 📊 Grade reports with academic emojis
+- 🎬 Movie database with entertainment emojis
+- �️ Weather data with weather condition emojis
+- 🔐 Security features with lock/shield emojis
+
+## 🔒 **Security Features**
 
 ### 🛡️ **Data Protection**
-- ✅ **Input Validation** - Prevent invalid entries
-- � **Duplicate Detection** - Avoid redundant data
-- 💾 **Auto-backup** - File creation and management
-- 🚨 **Error Handling** - Graceful failure recovery
+- **Input Validation**: All user inputs are validated
+- **Duplicate Prevention**: Built-in checks for existing data
+- **Error Handling**: Graceful handling of invalid inputs
+- **File Safety**: Automatic file creation and UTF-8 encoding
 
-## 📈 **Data Flow Architecture**
+### 🔐 **Encryption Methods**
+- **Base64 Encoding**: Light obfuscation for passwords (Pass Fort)
+- **Fernet Encryption**: Strong AES-128 encryption for notes (Sym Shield)
+- **Key Management**: Automatic key generation and secure storage
 
+## 📈 **Data Management**
+
+### 💾 **Storage Formats**
+- **CSV Files**: Contact vault, weather data (easy to read/edit)
+- **JSON Files**: Movie database, converted data (structured storage)
+- **Text Files**: Encrypted credentials (base64 encoded)
+- **Encrypted JSON**: Secure notes (Fernet encrypted)
+
+### 🔄 **Data Conversion Pipeline**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    DataPlex Suite                          │
-└─────────────────────────┬───────────────────────────────────┘
-                          │
-        ┌─────────────────┼─────────────────┐
-        ▼                 ▼                 ▼
-┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│  CSV Storage  │ │  JSON Storage │ │  Text Storage │
-│  contacts.csv │ │  movies.json  │ │  vault.txt    │
-│  weather.csv  │ │  api_data.json│ │               │
-└───────────────┘ └───────────────┘ └───────────────┘
-        │                 │                 │
-        └─────────────────┼─────────────────┘
-                          │
-        ┌─────────────────┼─────────────────┐
-        ▼                 ▼                 ▼
-┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│  Conversion   │ │ Visualization │ │  Security     │
-│  JSON ↔ CSV   │ │  Matplotlib   │ │  Base64       │
-│  Flattening   │ │  Charts       │ │  Encoding     │
-└───────────────┘ └───────────────┘ └───────────────┘
+JSON Data → CSV Converter → CSV Data → JSON Converter → JSON Data
+     ↓                                                      ↓
+Nested JSON → Flattener → Flat JSON → Analysis → Insights
 ```
 
-## � **Educational Value**
+## 🎯 **Educational Value**
 
 ### 📚 **Learning Outcomes**
-- 🐍 **Python Programming** - Core concepts and best practices
-- 💾 **File Handling** - CSV, JSON, and text file operations
-- � **Data Processing** - Collection, validation, and analysis
-- 🎨 **CLI Design** - User interface and experience design
-- � **Error Handling** - Robust application development
+- **File I/O Operations**: Reading/writing different file formats
+- **Data Structures**: Dictionaries, lists, JSON objects
+- **API Integration**: HTTP requests and JSON parsing
+- **Data Visualization**: Matplotlib chart generation
+- **Security Concepts**: Encryption and data protection
+- **Error Handling**: Try-catch blocks and validation
+- **CLI Design**: Menu-driven user interfaces
 
-### � **Skills Developed**
-- ✅ **Problem Solving** - Real-world application scenarios
-- � **Data Management** - Structured data organization
-- 🌐 **API Integration** - External service consumption
-- � **Visualization** - Data representation techniques
-- 🔒 **Security Basics** - Introduction to data protection
+### 🔧 **Programming Concepts**
+- **Functions**: Modular code organization
+- **File Handling**: CSV, JSON, and text file operations
+- **Data Processing**: Parsing, validation, transformation
+- **User Experience**: Emoji integration and formatting
+- **Security**: Encryption and encoding techniques
+- **Visualization**: Chart generation and data representation
 
 ---
 
-## 🌟 **Showcase Ready**
+## 🌟 **Project Highlights**
 
-This project demonstrates **professional Python development** skills with:
-- ✅ **Clean Code Architecture** - Modular, maintainable design
-- 📊 **Comprehensive Documentation** - Detailed code explanations
-- 🎨 **User-Friendly Interface** - Intuitive CLI experience
-- � **Robust Data Handling** - Validation and error management
-- 🚀 **Ready-to-Run Applications** - Complete working solutions
+✅ **Complete CLI Suite** - 10 fully functional applications  
+✅ **Professional Code Quality** - Clean, documented, and organized  
+✅ **Educational Focus** - Perfect for learning Python concepts  
+✅ **Real-World Applications** - Practical tools for daily use  
+✅ **Data Visualization** - Professional charts and graphs  
+✅ **Security Features** - Encryption and data protection  
+✅ **Emoji Integration** - Modern, user-friendly interface  
+✅ **Persistent Storage** - All data saved automatically  
+✅ **Error Handling** - Robust input validation  
+✅ **Modular Design** - Each app works independently  
 
-**Perfect for portfolios, interviews, and educational demonstrations!** 🎯
+---
+
+*🚀 **DataPlex Python Suite** - Your comprehensive toolkit for data management, visualization, and security in the command line!*
