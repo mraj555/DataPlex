@@ -21,6 +21,7 @@
 | 🌤️ **Weather Logger** | Weather Data Tracker | Log weather, API integration | ✅ Complete |
 | 📈 **Graph Craft** | Data Visualization | Weather charts & graphs | ✅ Complete |
 | 🔄 **JSON 2 CSV** | Data Format Converter | Convert JSON to CSV | ✅ Complete |
+| 🔄 **CSV 2 JSON** | Data Format Converter | Convert CSV to JSON | ✅ Complete |
 
 ## 🏗️ Project Architecture
 
@@ -32,7 +33,8 @@ DataPlex/
 ├── 🎬 02_cine_archieve.py    # Movie collection manager
 ├── 🌤️ 03_temp_trail.py      # Weather logging system
 ├── 📈 04_graph_craft.py      # Data visualization tool
-├── � 05_json_2_csv.py       # JSON to CSV converter
+├── 🔄 05_json_2_csv.py       # JSON to CSV converter
+├── � 06_csv_2_json.py       # CSV to JSON converter
 ├── �📄 contacts.csv           # Contact storage (auto-generated)
 ├── 📄 movies.json            # Movie database (auto-generated)
 ├── 📄 weather.csv            # Weather logs (auto-generated)
@@ -389,7 +391,30 @@ def load_json_data(filename):
             return []
 ```
 
-## 📊 Application Flow Diagrams
+## � CSV 2 JSON - Data Format Converter
+
+### 🎯 Core Features
+- 🔄 **Reverse Conversion** - Transform CSV data to JSON format
+- 📋 **Data Preview** - Show sample of converted data
+- 💾 **Bidirectional Flow** - Works with existing conversion pipeline
+- 🛡️ **Validation** - Check file existence and data integrity
+
+### 🔧 Technical Implementation
+
+#### **Data Processing**
+- **Input**: `converted_data.csv` file
+- **Output**: `converted_data.json` file
+- **Libraries**: `json`, `csv`, `os`
+
+#### **Core Functions**
+
+| Function | Purpose | Key Features |
+|----------|---------|--------------|
+| `load_csv_data()` | Load CSV from file | DictReader implementation |
+| `save_json_data()` | Save data to JSON | Pretty formatting with indent |
+| `preview_json_data()` | Display sample data | Configurable preview count |
+
+## �📊 Application Flow Diagrams
 
 ### 🫙 Contact Vault Flow
 ```
@@ -515,16 +540,21 @@ python 04_graph_craft.py
 python 05_json_2_csv.py
 ```
 
+#### CSV 2 JSON Converter
+```bash
+python 06_csv_2_json.py
+```
+
 ## 📈 Technical Specifications
 
-| Aspect | Contact Vault | Grade Insight | Cine Archive | Weather Logger | Graph Craft | JSON 2 CSV |
-|--------|---------------|---------------|--------------|----------------|-------------|------------|
-| **Language** | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x |
-| **Storage** | CSV File | In-memory Dictionary | JSON File | CSV File | CSV File | JSON/CSV |
-| **Encoding** | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 |
-| **Interface** | Command Line | Command Line | Command Line | Command Line | Chart Display | Command Line |
-| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only | `requests` | `matplotlib` | Standard Library |
-| **Platform** | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform |
+| Aspect | Contact Vault | Grade Insight | Cine Archive | Weather Logger | Graph Craft | JSON 2 CSV | CSV 2 JSON |
+|--------|---------------|---------------|--------------|----------------|-------------|------------|------------|
+| **Language** | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x |
+| **Storage** | CSV File | In-memory Dictionary | JSON File | CSV File | CSV File | JSON/CSV | CSV/JSON |
+| **Encoding** | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 |
+| **Interface** | Command Line | Command Line | Command Line | Command Line | Chart Display | Command Line | Command Line |
+| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only | `requests` | `matplotlib` | Standard Library | Standard Library |
+| **Platform** | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform |
 
 ## 🎨 User Experience Features
 
@@ -583,51 +613,36 @@ students = {
 ### Weather Logger CSV Structure
 ```csv
 Date,City,Temperature,Condition
-2025-11-20,Perth,24.38,Clear
-2025-11-21,Perth,19.72,Rain
+2025-11-26,Surat,30.12,Clear
+2025-11-26,New York,13.96,Mist
 ```
 
-### JSON 2 CSV Sample Data
+### API Data JSON Structure
 ```json
 [
-    {
-        "id": 101,
-        "name": "Alicia Romero",
-        "email": "alicia.romero@example.com",
-        "age": 29,
-        "is_active": true,
-        "signup_date": "2024-12-04"
-    }
+  {
+    "id": 101,
+    "name": "Alicia Romero",
+    "email": "alicia.romero@example.com",
+    "age": 29,
+    "is_active": true,
+    "signup_date": "2024-12-04"
+  }
 ]
 ```
 
-## 🌟 Key Strengths
+---
 
-1. **🛡️ Robust Error Handling** - All applications handle edge cases gracefully
-2. **📱 User-Friendly Interface** - Clear prompts and intuitive navigation
-3. **💾 Data Persistence** - Contact Vault, Cine Archive, and Weather Logger maintain data between sessions
-4. **📊 Comprehensive Analysis** - Grade Insight provides detailed statistics
-5. **🚀 Minimal Dependencies** - Pure Python standard library implementation (except Weather Logger and Graph Craft)
-6. **🎨 Professional Presentation** - Clean formatting and visual enhancements
-7. **🔍 Smart Search** - Cine Archive offers partial matching capabilities
-8. **⭐ Input Validation** - Rating validation in Cine Archive (0-10 range)
-9. **📈 Data Visualization** - Graph Craft provides interactive charts
-10. **🌐 API Integration** - Weather Logger connects to OpenWeatherMap
-11. **🔄 Data Conversion** - JSON 2 CSV enables format flexibility
+## 🎯 **Educational Value**
 
-## 📚 Educational Value
-
-### Learning Outcomes
-- 📚 **File I/O Operations** - CSV and JSON file handling
-- 📖 **Data Structures** - Dictionaries, lists, and arrays
-- 🛡️ **Error Handling** - Try-catch blocks and validation
-- 🎮 **CLI Development** - Menu-driven interfaces
-- 💾 **Data Persistence** - File-based storage systems
-- 🔍 **Search Algorithms** - Case-insensitive partial matching
-- 📊 **Data Visualization** - Matplotlib chart generation
-- 🔄 **Data Transformation** - JSON to CSV conversion
-- � **API Integration** - HTTP requests and JSON parsing
+DataPlex serves as an excellent learning resource for:
+- 🐍 **Python Programming** - File I/O, data structures, functions
+- 📊 **Data Management** - CSV/JSON handling, data validation
+- � **CLI Design** - User interface patterns, menu systems
+- 🌐 **API Integration** - HTTP requests, JSON parsing
+- � **Data Visualization** - Matplotlib charts, data analysis
+- 💾 **Persistence** - File-based storage, data serialization
 
 ---
 
-*Built with ❤️ using Python. Perfect for learning file handling, data structures, and CLI application development.*
+*Built with ❤️ for educational purposes. Each application demonstrates different aspects of Python programming and data management techniques.*
