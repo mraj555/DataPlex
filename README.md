@@ -1,4 +1,4 @@
-# 🚀 DataPlex Python Suite
+# 🚀 **DataPlex Python Suite**
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
 ![CLI](https://img.shields.io/badge/Type-CLI%20Applications-orange.svg)
@@ -7,11 +7,11 @@
 ![Education](https://img.shields.io/badge/Purpose-Educational-red.svg)
 ![Visualization](https://img.shields.io/badge/Features-Data%20Visualization-purple.svg)
 
-## 📋 Overview
+## 📋 **Overview**
 
 **DataPlex** is a collection of sleek, command-line applications built with Python for managing contacts, student grades, movies, weather data, and data visualization. Each application provides a simple yet powerful interface with persistent storage and intuitive user experiences.
 
-## 🎯 Applications Overview
+## 🎯 **Applications Overview**
 
 | Application | Purpose | Key Features | Status |
 |-----------|---------|--------------|--------|
@@ -22,10 +22,11 @@
 | 📈 **Graph Craft** | Data Visualization | Weather charts & graphs | ✅ Complete |
 | 🔄 **JSON 2 CSV** | Data Format Converter | Convert JSON to CSV | ✅ Complete |
 | 🔄 **CSV 2 JSON** | Data Format Converter | Convert CSV to JSON | ✅ Complete |
+| 🔧 **JSON Simplify** | JSON Flattener | Flatten nested JSON structures | ✅ Complete |
 
-## 🏗️ Project Architecture
+## 🏗️ **Project Architecture**
 
-### 📁 File Structure
+### 📁 **File Structure**
 ```
 DataPlex/
 ├── 🫙 00_contact_vault.py    # Contact management system
@@ -34,18 +35,19 @@ DataPlex/
 ├── 🌤️ 03_temp_trail.py      # Weather logging system
 ├── 📈 04_graph_craft.py      # Data visualization tool
 ├── 🔄 05_json_2_csv.py       # JSON to CSV converter
-├── � 06_csv_2_json.py       # CSV to JSON converter
-├── �📄 contacts.csv           # Contact storage (auto-generated)
+├── 🔄 06_csv_2_json.py       # CSV to JSON converter
+├── 🔧 07_json_simplify.py    # JSON flattening utility
+├── 📄 contacts.csv           # Contact storage (auto-generated)
 ├── 📄 movies.json            # Movie database (auto-generated)
 ├── 📄 weather.csv            # Weather logs (auto-generated)
 ├── 📄 api_data.json          # Sample API data for converter
-├── 📄 converted_data.csv     # Converted data output
+├── 📄 nested_data.json       # Sample nested JSON data
 └── 📖 README.md              # Project documentation
 ```
 
-## 🫙 Contact Vault - Contact Management System
+## 🫙 **Contact Vault - Contact Management System**
 
-### 🎯 Core Features
+### 🎯 **Core Features**
 - ✅ **Add Contacts** - Store name, mobile, and email with duplicate prevention
 - 📖 **View Contacts** - Display all contacts in a readable format
 - 🔍 **Search Contacts** - Find contacts by name (case-insensitive)
@@ -53,7 +55,7 @@ DataPlex/
 - 🛡️ **Data Validation** - Duplicate name prevention
 - 🎨 **User-Friendly UI** - Clear menu with emoji indicators
 
-### 🔧 Technical Implementation
+### 🔧 **Technical Implementation**
 
 #### **Data Layer** (`contacts.csv`)
 - **Format**: CSV with UTF-8 encoding
@@ -69,9 +71,9 @@ DataPlex/
 | `search_contact()` | Search by name | Case-insensitive matching, emoji-enhanced display |
 | `main()` | CLI interface | Menu-driven navigation with match-case structure |
 
-### 💡 Code Highlights
+### 💡 **Code Highlights**
 
-#### 🛡️ Duplicate Prevention System
+#### 🛡️ **Duplicate Prevention System**
 ```python
 def add_contact():
     name = input("Name: ")
@@ -84,14 +86,14 @@ def add_contact():
                 return
 ```
 
-#### 🎨 Enhanced Search Display
+#### 🎨 **Enhanced Search Display**
 ```python
 def search_contact():
     # Enhanced output with visual indicators
     print(f"🙎 Name: {row['Name']} | 📱 Mobile No.: {row['Mobile No.']}")
 ```
 
-#### 🎮 Interactive Menu System
+#### 🎮 **Interactive Menu System**
 ```python
 def main():
     while True:
@@ -110,16 +112,16 @@ def main():
             case "4": break
 ```
 
-## 📊 Grade Insight - Student Grade Analyzer
+## 📊 **Grade Insight - Student Grade Analyzer**
 
-### 🎯 Core Features
+### 🎯 **Core Features**
 - 📥 **Data Collection** - Interactive student grade input
 - 📈 **Statistical Analysis** - Calculate averages, highest/lowest marks
 - 🏆 **Performance Recognition** - Identify top performers and struggling students
 - 📋 **Detailed Reports** - Comprehensive grade summaries
 - 🛡️ **Input Validation** - Handle invalid inputs gracefully
 
-### 🔧 Technical Implementation
+### 🔧 **Technical Implementation**
 
 #### **Data Storage**
 - **Format**: In-memory dictionary during runtime
@@ -133,9 +135,9 @@ def main():
 | `collect_students_data()` | Interactive data collection | Duplicate prevention, input validation, 'done' termination |
 | `display_students_report()` | Comprehensive report generation | Statistics calculation, formatted output, performance analysis |
 
-### 📊 Code Highlights
+### 📊 **Code Highlights**
 
-#### 🛡️ Input Validation & Duplicate Prevention
+#### 🛡️ **Input Validation & Duplicate Prevention**
 ```python
 def collect_students_data():
     while True:
@@ -149,7 +151,7 @@ def collect_students_data():
             continue
 ```
 
-#### 📈 Statistical Analysis & Report Generation
+#### 📈 **Statistical Analysis & Report Generation**
 ```python
 def display_students_report(students):
     # Extract all marks into a list for easy calculation
@@ -163,7 +165,7 @@ def display_students_report(students):
     lower = [name for name, score in students.items() if score == lowest_marks]
 ```
 
-#### 📋 Professional Report Formatting
+#### 📋 **Professional Report Formatting**
 ```python
 print("-" * 50)
 print(" Student Report Card 📇 ")
@@ -174,9 +176,9 @@ print(f"Lowest Marks: {lowest_marks:.2f} by {', '.join(lower)}")
 print("-" * 50)
 ```
 
-## 🎬 Cine Archive - Movie Collection Manager
+## 🎬 **Cine Archive - Movie Collection Manager**
 
-### 🎯 Core Features
+### 🎯 **Core Features**
 - 🎞️ **Add Movies** - Store title, genre, and rating with duplicate prevention
 - 📺 **View Collection** - Display all movies in formatted list
 - 🔍 **Smart Search** - Search by title or genre (partial, case-insensitive)
@@ -184,7 +186,7 @@ print("-" * 50)
 - ⭐ **Rating Validation** - Ensure ratings are between 0-10
 - 🎭 **Rich Display** - Emoji-enhanced movie listings
 
-### 🔧 Technical Implementation
+### 🔧 **Technical Implementation**
 
 #### **Data Layer** (`movies.json`)
 - **Format**: JSON with UTF-8 encoding
@@ -212,9 +214,9 @@ print("-" * 50)
 | `search_movie()` | Smart search | Partial matching, case-insensitive |
 | `run_movie_db()` | Main interface | Menu-driven navigation |
 
-### 🎬 Code Highlights
+### 🎬 **Code Highlights**
 
-#### 🛡️ Duplicate Prevention & Rating Validation
+#### 🛡️ **Duplicate Prevention & Rating Validation**
 ```python
 def add_movie(movies):
     title = input("Enter Movie Title: ").strip()
@@ -223,6 +225,8 @@ def add_movie(movies):
     if any(movie["title"].lower() == title.lower() for movie in movies):
         print("Movie with this title already exists.")
         return
+    
+    genre = input("Enter Movie Genre: ").strip()
     
     # Validate rating: must be a number between 0 and 10
     try:
@@ -234,7 +238,7 @@ def add_movie(movies):
         return
 ```
 
-#### 🎭 Rich Display Formatting
+#### 🎭 **Rich Display Formatting**
 ```python
 def view_movies(movies):
     if not movies:
@@ -247,7 +251,7 @@ def view_movies(movies):
     print("-" * 40)
 ```
 
-#### 🔍 Smart Search Implementation
+#### 🔍 **Smart Search Implementation**
 ```python
 def search_movie(movies):
     search_term = input("Enter Title or Genre to Search: ").strip()
@@ -261,16 +265,16 @@ def search_movie(movies):
     ]
 ```
 
-## 🌤️ Weather Logger - Weather Data Tracker
+## 🌤️ **Weather Logger - Weather Data Tracker**
 
-### 🎯 Core Features
+### 🎯 **Core Features**
 - 🌡️ **Temperature Logging** - Record weather data with API integration
 - 🌍 **Multi-City Support** - Track weather for different cities
 - 📅 **Date-Based Logging** - Prevent duplicate entries per city per day
 - 🌈 **Weather Conditions** - Store weather conditions along with temperature
 - 💾 **CSV Storage** - Persistent weather data storage
 
-### 🔧 Technical Implementation
+### 🔧 **Technical Implementation**
 
 #### **Data Layer** (`weather.csv`)
 - **Format**: CSV with UTF-8 encoding
@@ -290,7 +294,7 @@ Date,City,Temperature,Condition
 | `view_logs()` | Display weather history | CSV reading, formatted output |
 | `main()` | CLI interface | Menu-driven navigation |
 
-#### 🌡️ Weather API Integration
+#### 🌡️ **Weather API Integration**
 ```python
 def log_weather():
     # Get today's date in YYYY-MM-DD format
@@ -311,15 +315,15 @@ def log_weather():
         print(f"🌤️ Temperature in {city} on {date}: {temp}°C — {condition} 🌈")
 ```
 
-## 📈 Graph Craft - Data Visualization Tool
+## 📈 **Graph Craft - Data Visualization Tool**
 
-### 🎯 Core Features
+### 🎯 **Core Features**
 - 📊 **Temperature Trends** - Line chart of daily temperature changes
 - 📋 **Weather Condition Analysis** - Bar chart of condition frequencies
 - 📈 **Matplotlib Integration** - Professional chart generation
 - 🎨 **Interactive Charts** - Zoom, pan, and save capabilities
 
-### 🔧 Technical Implementation
+### 🔧 **Technical Implementation**
 
 #### **Data Processing**
 - **Input**: `weather.csv` file
@@ -332,7 +336,7 @@ def log_weather():
 |----------|---------|--------------|
 | `visualize_weather()` | Generate weather charts | Temperature trends, condition frequency |
 
-#### 📊 Chart Generation
+#### 📊 **Chart Generation**
 ```python
 def visualize_weather():
     # Lists to store dates and temperatures for the line chart
@@ -352,15 +356,15 @@ def visualize_weather():
     plt.show()
 ```
 
-## 🔄 JSON 2 CSV - Data Format Converter
+## 🔄 **JSON 2 CSV - Data Format Converter**
 
-### 🎯 Core Features
+### 🎯 **Core Features**
 - 🔄 **Format Conversion** - Transform JSON data to CSV format
 - 📊 **Data Processing** - Handle complex JSON structures
 - 💾 **File Management** - Automatic file creation and validation
 - 🛡️ **Error Handling** - Graceful handling of missing or invalid data
 
-### 🔧 Technical Implementation
+### 🔧 **Technical Implementation**
 
 #### **Data Processing**
 - **Input**: `api_data.json` file
@@ -374,7 +378,7 @@ def visualize_weather():
 | `load_json_data()` | Load JSON from file | Error handling, validation |
 | `save_csv_data()` | Save data to CSV | Dictionary to CSV conversion |
 
-#### 🔄 Conversion Process
+#### 🔄 **Conversion Process**
 ```python
 def load_json_data(filename):
     # Check if the JSON file exists on disk
@@ -391,15 +395,15 @@ def load_json_data(filename):
             return []
 ```
 
-## � CSV 2 JSON - Data Format Converter
+## 🔄 **CSV 2 JSON - Data Format Converter**
 
-### 🎯 Core Features
+### 🎯 **Core Features**
 - 🔄 **Reverse Conversion** - Transform CSV data to JSON format
 - 📋 **Data Preview** - Show sample of converted data
 - 💾 **Bidirectional Flow** - Works with existing conversion pipeline
 - 🛡️ **Validation** - Check file existence and data integrity
 
-### 🔧 Technical Implementation
+### 🔧 **Technical Implementation**
 
 #### **Data Processing**
 - **Input**: `converted_data.csv` file
@@ -414,9 +418,57 @@ def load_json_data(filename):
 | `save_json_data()` | Save data to JSON | Pretty formatting with indent |
 | `preview_json_data()` | Display sample data | Configurable preview count |
 
-## �📊 Application Flow Diagrams
+## 🔧 **JSON Simplify - JSON Flattener**
 
-### 🫙 Contact Vault Flow
+### 🎯 **Core Features**
+- 🔧 **Nested JSON Flattening** - Convert complex nested structures to flat key-value pairs
+- 🎯 **Recursive Processing** - Handle deeply nested objects and arrays
+- 💾 **Data Transformation** - Simplify JSON for easier analysis
+- 🛡️ **Type Safety** - Handle different data types appropriately
+
+### 🔧 **Technical Implementation**
+
+#### **Data Processing**
+- **Input**: `nested_data.json` file
+- **Output**: `simplified_data.json` file
+- **Libraries**: `json`, `os`
+
+#### **Core Functions**
+
+| Function | Purpose | Key Features |
+|----------|---------|--------------|
+| `flatten_json()` | Recursive flattening | Handle nested objects and arrays |
+| `main()` | Process workflow | Load, flatten, save data |
+
+#### 🔧 **Recursive Flattening Algorithm**
+```python
+def flatten_json(data, parent_key="", sep="_"):
+    """
+    Recursively flattens a nested JSON structure into a single-level dictionary.
+    
+    Args:
+        data: The JSON data (dict, list, or primitive value).
+        parent_key: The accumulated key string from parent levels.
+        sep: The separator used to join nested keys.
+    
+    Returns:
+        A dictionary with flattened keys and corresponding values.
+    """
+    items = {}
+
+    # If data is a dictionary, iterate through its key-value pairs
+    if isinstance(data, dict):
+        for k, v in data.items():
+            # Build the full key by appending the current key to the parent key
+            full_key = f"{parent_key}{sep}{k}" if parent_key else k
+            print(full_key)  # Debug: print the current key being processed
+            # Recursively flatten the value and update items
+            items.update(flatten_json(v, full_key, sep=sep))
+```
+
+## 📊 **Application Flow Diagrams**
+
+### 🫙 **Contact Vault Flow**
 ```
 ┌─────────────────┐
 │   Start App     │
@@ -441,7 +493,7 @@ def load_json_data(filename):
 └─────────┘ └─────────┘ └─────────┘ └─────────┘
 ```
 
-### 📊 Grade Insight Flow
+### 📊 **Grade Insight Flow**
 ```
 ┌─────────────────┐
 │   Start App     │
@@ -466,7 +518,7 @@ def load_json_data(filename):
 └─────────────────┘
 ```
 
-### 🎬 Cine Archive Flow
+### 🎬 **Cine Archive Flow**
 ```
 ┌─────────────────┐
 │   Start App     │
@@ -496,19 +548,19 @@ def load_json_data(filename):
 └─────────┘ └─────────┘ └─────────┘ └─────────┘
 ```
 
-## 🚀 Getting Started
+## 🚀 **Getting Started**
 
-### Prerequisites
+### **Prerequisites**
 - **Python 3.x** installed on your system
 - **External dependencies**: `requests`, `matplotlib` (for Weather Logger and Graph Craft)
 
-### Installation
+### **Installation**
 ```bash
 # Install required packages
 pip install requests matplotlib
 ```
 
-### Running the Applications
+### **Running the Applications**
 
 #### Contact Vault
 ```bash
@@ -545,104 +597,45 @@ python 05_json_2_csv.py
 python 06_csv_2_json.py
 ```
 
-## 📈 Technical Specifications
-
-| Aspect | Contact Vault | Grade Insight | Cine Archive | Weather Logger | Graph Craft | JSON 2 CSV | CSV 2 JSON |
-|--------|---------------|---------------|--------------|----------------|-------------|------------|------------|
-| **Language** | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x |
-| **Storage** | CSV File | In-memory Dictionary | JSON File | CSV File | CSV File | JSON/CSV | CSV/JSON |
-| **Encoding** | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 |
-| **Interface** | Command Line | Command Line | Command Line | Command Line | Chart Display | Command Line | Command Line |
-| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only | `requests` | `matplotlib` | Standard Library | Standard Library |
-| **Platform** | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform |
-
-## 🎨 User Experience Features
-
-### Visual Enhancements
-- 📱 **Emojis**: Visual indicators (`🫙`, `📊`, `🎬`, `🙎`, `📱`, `🍿`, `🎭`, `⭐`, `🌤️`, `📈`)
-- 📋 **Clear Formatting**: Consistent separators and spacing
-- 🎯 **Intuitive Menus**: Numbered options with clear labels
-- ⚡ **Quick Feedback**: Immediate response to user actions
-
-### Input Validation
-- ✅ **Duplicate Detection**: Prevents identical entries
-- 🔤 **Case-Insensitive**: Smart string comparison
-- ⚠️ **Error Handling**: Graceful handling of invalid inputs
-- 🔄 **Flexible Formats**: Accepts various input formats
-
-## 📊 Data Management
-
-### Contact Vault CSV Structure
-```csv
-Name,Mobile No.,Email ID
-John Doe,1234567890,john@example.com
-Jane Smith,0987654321,jane@example.com
+#### JSON Simplify
+```bash
+python 07_json_simplify.py
 ```
 
-### Grade Insight Data Flow
-```python
-# Input Collection
-students = {
-    "Alice": 85.5,
-    "Bob": 92.0,
-    "Charlie": 78.5
-}
+## 📈 **Technical Specifications**
 
-# Report Generation
-# Average: 85.33
-# Highest: 92.0 (Bob)
-# Lowest: 78.5 (Charlie)
-```
-
-### Cine Archive JSON Structure
-```json
-[
-  {
-    "title": "Dil Ke Safar",
-    "genre": "Romantic Drama",
-    "rating": 8.1
-  },
-  {
-    "title": "Mumbai Nights",
-    "genre": "Action / Crime",
-    "rating": 7.4
-  }
-]
-```
-
-### Weather Logger CSV Structure
-```csv
-Date,City,Temperature,Condition
-2025-11-26,Surat,30.12,Clear
-2025-11-26,New York,13.96,Mist
-```
-
-### API Data JSON Structure
-```json
-[
-  {
-    "id": 101,
-    "name": "Alicia Romero",
-    "email": "alicia.romero@example.com",
-    "age": 29,
-    "is_active": true,
-    "signup_date": "2024-12-04"
-  }
-]
-```
+| Aspect | Contact Vault | Grade Insight | Cine Archive | Weather Logger | Graph Craft | JSON 2 CSV | CSV 2 JSON | JSON Simplify |
+|--------|---------------|---------------|--------------|----------------|-------------|------------|------------|---------------|
+| **Language** | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x |
+| **Storage** | CSV File | In-memory Dictionary | JSON File | CSV File | CSV File | JSON/CSV | CSV/JSON | JSON |
+| **Encoding** | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 |
+| **Interface** | Command Line | Command Line | Command Line | Command Line | Chart Display | Command Line | Command Line | Command Line |
+| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only | `requests` | `matplotlib` | Standard Library | Standard Library | Standard Library |
 
 ---
 
-## 🎯 **Educational Value**
+## 🎨 **Design Philosophy**
 
-DataPlex serves as an excellent learning resource for:
-- 🐍 **Python Programming** - File I/O, data structures, functions
-- 📊 **Data Management** - CSV/JSON handling, data validation
-- � **CLI Design** - User interface patterns, menu systems
-- 🌐 **API Integration** - HTTP requests, JSON parsing
-- � **Data Visualization** - Matplotlib charts, data analysis
-- 💾 **Persistence** - File-based storage, data serialization
+DataPlex follows a **modular architecture** where each application is completely independent yet follows consistent patterns:
+
+- 🎯 **Single Responsibility** - Each app handles one specific domain
+- 🔄 **Consistent Interface** - Similar menu structures across all apps
+- � **Persistent Storage** - Data survives between sessions
+- 🛡️ **Input Validation** - Robust error handling and validation
+- 🎨 **User Experience** - Clear prompts and emoji-enhanced displays
+- 📊 **Data Integrity** - Duplicate prevention and data consistency
+
+## 🔮 **Future Enhancements**
+
+- 🌐 **Web Interface** - Flask/FastAPI integration for web access
+- 📱 **Mobile App** - Kivy or BeeWare for mobile deployment
+- 🗄️ **Database Support** - SQLite integration for complex queries
+- � **Authentication** - User accounts and data isolation
+- 📊 **Advanced Analytics** - Statistical analysis and trend prediction
+- 🔄 **Data Sync** - Cloud synchronization across devices
+- � **GUI Interface** - Tkinter or PyQt desktop applications
 
 ---
 
-*Built with ❤️ for educational purposes. Each application demonstrates different aspects of Python programming and data management techniques.*
+**⭐ Star this repository if you find it helpful!**
+**🚀 Built with ❤️ for educational purposes and practical learning**
