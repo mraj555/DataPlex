@@ -1,0 +1,4 @@
+id,name,email,age,is_active,signup_date
+101,Alicia Romero,alicia.romero@example.com,29,True,2024-12-04
+102,Kevin Hughes,kevin.hughes@example.com,34,False,2023-09-12
+103,Priya Malhotra,priya.malhotra@example.com,25,True,2024-06-19

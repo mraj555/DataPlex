@@ -19,7 +19,8 @@
 | 📊 **Grade Insight** | Student Grade Analysis | Collect grades, Generate reports | ✅ Complete |
 | 🎬 **Cine Archive** | Movie Collection Manager | Add, View, Search movies | ✅ Complete |
 | 🌤️ **Weather Logger** | Weather Data Tracker | Log weather, API integration | ✅ Complete |
-| � **Graph Craft** | Data Visualization | Weather charts & graphs | ✅ Complete |
+| 📈 **Graph Craft** | Data Visualization | Weather charts & graphs | ✅ Complete |
+| 🔄 **JSON 2 CSV** | Data Format Converter | Convert JSON to CSV | ✅ Complete |
 
 ## 🏗️ Project Architecture
 
@@ -31,9 +32,12 @@ DataPlex/
 ├── 🎬 02_cine_archieve.py    # Movie collection manager
 ├── 🌤️ 03_temp_trail.py      # Weather logging system
 ├── 📈 04_graph_craft.py      # Data visualization tool
-├── 📄 contacts.csv           # Contact storage (auto-generated)
+├── � 05_json_2_csv.py       # JSON to CSV converter
+├── �📄 contacts.csv           # Contact storage (auto-generated)
 ├── 📄 movies.json            # Movie database (auto-generated)
 ├── 📄 weather.csv            # Weather logs (auto-generated)
+├── 📄 api_data.json          # Sample API data for converter
+├── 📄 converted_data.csv     # Converted data output
 └── 📖 README.md              # Project documentation
 ```
 
@@ -346,6 +350,45 @@ def visualize_weather():
     plt.show()
 ```
 
+## 🔄 JSON 2 CSV - Data Format Converter
+
+### 🎯 Core Features
+- 🔄 **Format Conversion** - Transform JSON data to CSV format
+- 📊 **Data Processing** - Handle complex JSON structures
+- 💾 **File Management** - Automatic file creation and validation
+- 🛡️ **Error Handling** - Graceful handling of missing or invalid data
+
+### 🔧 Technical Implementation
+
+#### **Data Processing**
+- **Input**: `api_data.json` file
+- **Output**: `converted_data.csv` file
+- **Libraries**: `json`, `csv`, `os`
+
+#### **Core Functions**
+
+| Function | Purpose | Key Features |
+|----------|---------|--------------|
+| `load_json_data()` | Load JSON from file | Error handling, validation |
+| `save_csv_data()` | Save data to CSV | Dictionary to CSV conversion |
+
+#### 🔄 Conversion Process
+```python
+def load_json_data(filename):
+    # Check if the JSON file exists on disk
+    if not os.path.exists(filename):
+        print("No Json file found.")
+        return []
+    
+    # Open and attempt to parse the JSON file
+    with open(filename, "r", encoding="utf-8") as f:
+        try:
+            return json.load(f)  # Convert JSON text into Python objects
+        except:
+            print("Invalid JSON format.")
+            return []
+```
+
 ## 📊 Application Flow Diagrams
 
 ### 🫙 Contact Vault Flow
@@ -467,16 +510,21 @@ python 03_temp_trail.py
 python 04_graph_craft.py
 ```
 
+#### JSON 2 CSV Converter
+```bash
+python 05_json_2_csv.py
+```
+
 ## 📈 Technical Specifications
 
-| Aspect | Contact Vault | Grade Insight | Cine Archive | Weather Logger | Graph Craft |
-|--------|---------------|---------------|--------------|----------------|-------------|
-| **Language** | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x |
-| **Storage** | CSV File | In-memory Dictionary | JSON File | CSV File | CSV File |
-| **Encoding** | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 |
-| **Interface** | Command Line | Command Line | Command Line | Command Line | Chart Display |
-| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only | `requests` | `matplotlib` |
-| **Platform** | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform |
+| Aspect | Contact Vault | Grade Insight | Cine Archive | Weather Logger | Graph Craft | JSON 2 CSV |
+|--------|---------------|---------------|--------------|----------------|-------------|------------|
+| **Language** | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x |
+| **Storage** | CSV File | In-memory Dictionary | JSON File | CSV File | CSV File | JSON/CSV |
+| **Encoding** | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 |
+| **Interface** | Command Line | Command Line | Command Line | Command Line | Chart Display | Command Line |
+| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only | `requests` | `matplotlib` | Standard Library |
+| **Platform** | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform |
 
 ## 🎨 User Experience Features
 
@@ -535,8 +583,22 @@ students = {
 ### Weather Logger CSV Structure
 ```csv
 Date,City,Temperature,Condition
-2025-11-26,Surat,30.12,Clear
-2025-11-26,New York,13.96,Mist
+2025-11-20,Perth,24.38,Clear
+2025-11-21,Perth,19.72,Rain
+```
+
+### JSON 2 CSV Sample Data
+```json
+[
+    {
+        "id": 101,
+        "name": "Alicia Romero",
+        "email": "alicia.romero@example.com",
+        "age": 29,
+        "is_active": true,
+        "signup_date": "2024-12-04"
+    }
+]
 ```
 
 ## 🌟 Key Strengths
@@ -551,6 +613,7 @@ Date,City,Temperature,Condition
 8. **⭐ Input Validation** - Rating validation in Cine Archive (0-10 range)
 9. **📈 Data Visualization** - Graph Craft provides interactive charts
 10. **🌐 API Integration** - Weather Logger connects to OpenWeatherMap
+11. **🔄 Data Conversion** - JSON 2 CSV enables format flexibility
 
 ## 📚 Educational Value
 
@@ -562,16 +625,9 @@ Date,City,Temperature,Condition
 - 💾 **Data Persistence** - File-based storage systems
 - 🔍 **Search Algorithms** - Case-insensitive partial matching
 - 📊 **Data Visualization** - Matplotlib chart generation
-- 🌐 **API Integration** - HTTP requests and JSON parsing
-
-### Code Quality Features
-- 📖 **Clear Documentation** - Comprehensive docstrings
-- 🏗️ **Modular Design** - Separate functions for each feature
-- 📏 **Consistent Patterns** - Similar structure across applications
-- 🎯 **Single Responsibility** - Each function has one clear purpose
+- 🔄 **Data Transformation** - JSON to CSV conversion
+- � **API Integration** - HTTP requests and JSON parsing
 
 ---
 
-*Built with ❤️ using Python's standard library - Minimal dependencies required!*
-
-**🎯 Perfect for educational purposes, personal productivity, and learning Python CLI development!**
+*Built with ❤️ using Python. Perfect for learning file handling, data structures, and CLI application development.*

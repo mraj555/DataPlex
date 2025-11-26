@@ -1,0 +1,26 @@
+[
+    {
+        "id": 101,
+        "name": "Alicia Romero",
+        "email": "alicia.romero@example.com",
+        "age": 29,
+        "is_active": true,
+        "signup_date": "2024-12-04"
+      },
+      {
+        "id": 102,
+        "name": "Kevin Hughes",
+        "email": "kevin.hughes@example.com",
+        "age": 34,
+        "is_active": false,
+        "signup_date": "2023-09-12"
+      },
+      {
+        "id": 103,
+        "name": "Priya Malhotra",
+        "email": "priya.malhotra@example.com",
+        "age": 25,
+        "is_active": true,
+        "signup_date": "2024-06-19"
+      }
+]
