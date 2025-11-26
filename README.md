@@ -8,7 +8,7 @@
 
 ## 📋 Overview
 
-**DataPlex** is a collection of sleek, command-line applications built with Python for managing contacts, student grades, and movie collections. Each application provides a simple yet powerful interface with persistent storage and intuitive user experiences.
+**DataPlex** is a collection of sleek, command-line applications built with Python for managing contacts, student grades, movies, and weather data. Each application provides a simple yet powerful interface with persistent storage and intuitive user experiences.
 
 ## 🎯 Applications Overview
 
@@ -17,6 +17,7 @@
 | 🫙 **Contact Vault** | Contact Management | Add, View, Search contacts | ✅ Complete |
 | 📊 **Grade Insight** | Student Grade Analysis | Collect grades, Generate reports | ✅ Complete |
 | 🎬 **Cine Archive** | Movie Collection Manager | Add, View, Search movies | ✅ Complete |
+| 🌤️ **Weather Logger** | Weather Data Tracker | Log weather, API integration | 🚧 Development |
 
 ## 🏗️ Project Architecture
 
@@ -26,8 +27,10 @@ DataPlex/
 ├── 🫙 00_contact_vault.py    # Contact management system
 ├── 📊 01_grade_insight.py    # Student grade analyzer
 ├── 🎬 02_cine_archieve.py    # Movie collection manager
+├── 🌤️ 03_temp_trail.py      # Weather logging system
 ├── 📄 contacts.csv           # Contact storage (auto-generated)
 ├── 📄 movies.json            # Movie database (auto-generated)
+├── 📄 weather.csv            # Weather logs (auto-generated)
 └── 📖 README.md              # Project documentation
 ```
 
@@ -249,7 +252,55 @@ def search_movie(movies):
     ]
 ```
 
-## 📊 Application Flow Diagrams
+## 🌤️ Weather Logger - Weather Data Tracker
+
+### 🎯 Core Features
+- 🌡️ **Temperature Logging** - Record weather data with API integration
+- 🌍 **Multi-City Support** - Track weather for different cities
+- 📅 **Date-Based Logging** - Prevent duplicate entries per city per day
+- 🌈 **Weather Conditions** - Store weather conditions along with temperature
+- 💾 **CSV Storage** - Persistent weather data storage
+
+### � Technical Implementation
+
+#### **Data Layer** (`weather.csv`)
+- **Format**: CSV with UTF-8 encoding
+- **Columns**: Date, City, Temperature, Condition
+- **Sample Data**:
+```csv
+Date,City,Temperature,Condition
+2025-11-26,Surat,30.12,Clear
+2025-11-26,New York,13.96,Mist
+```
+
+#### **Core Functions**
+
+| Function | Purpose | Key Features |
+|----------|---------|--------------|
+| `log_weather()` | Fetch and log weather data | API integration, duplicate prevention |
+
+#### 🌡️ Weather API Integration
+```python
+def log_weather():
+    # Get today's date in YYYY-MM-DD format
+    date = datetime.now().strftime("%Y-%m-%d")
+    city = input("Enter your city name: ").strip()
+    
+    # Build the API URL with the city name, API key, and metric units
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+    try:
+        response = requests.get(url)
+        data = response.json()
+        
+        # Extract temperature and weather condition from the JSON response
+        temp = data["main"]["temp"]
+        condition = data["weather"][0]["main"]
+        
+        # Display the weather info to the user
+        print(f"🌤️ Temperature in {city} on {date}: {temp}°C — {condition} 🌈")
+```
+
+## �📊 Application Flow Diagrams
 
 ### 🫙 Contact Vault Flow
 ```
@@ -354,21 +405,26 @@ python 01_grade_insight.py
 python 02_cine_archieve.py
 ```
 
+#### Weather Logger
+```bash
+python 03_temp_trail.py
+```
+
 ## 📈 Technical Specifications
 
-| Aspect | Contact Vault | Grade Insight | Cine Archive |
-|--------|---------------|---------------|--------------|
-| **Language** | Python 3.x | Python 3.x | Python 3.x |
-| **Storage** | CSV File | In-memory Dictionary | JSON File |
-| **Encoding** | UTF-8 | UTF-8 | UTF-8 |
-| **Interface** | Command Line | Command Line | Command Line |
-| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only |
-| **Platform** | Cross-platform | Cross-platform | Cross-platform |
+| Aspect | Contact Vault | Grade Insight | Cine Archive | Weather Logger |
+|--------|---------------|---------------|--------------|----------------|
+| **Language** | Python 3.x | Python 3.x | Python 3.x | Python 3.x |
+| **Storage** | CSV File | In-memory Dictionary | JSON File | CSV File |
+| **Encoding** | UTF-8 | UTF-8 | UTF-8 | UTF-8 |
+| **Interface** | Command Line | Command Line | Command Line | Command Line |
+| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only | `requests` |
+| **Platform** | Cross-platform | Cross-platform | Cross-platform | Cross-platform |
 
 ## 🎨 User Experience Features
 
 ### Visual Enhancements
-- 📱 **Emojis**: Visual indicators (`🫙`, `📊`, `🎬`, `🙎`, `📱`, `🍿`, `🎭`, `⭐`)
+- 📱 **Emojis**: Visual indicators (`🫙`, `📊`, `🎬`, `🙎`, `📱`, `🍿`, `🎭`, `⭐`, `🌤️`)
 - 📋 **Clear Formatting**: Consistent separators and spacing
 - 🎯 **Intuitive Menus**: Numbered options with clear labels
 - ⚡ **Quick Feedback**: Immediate response to user actions
@@ -419,35 +475,42 @@ students = {
 ]
 ```
 
+### Weather Logger CSV Structure
+```csv
+Date,City,Temperature,Condition
+2025-11-26,Surat,30.12,Clear
+2025-11-26,New York,13.96,Mist
+```
+
 ## 🌟 Key Strengths
 
 1. **🛡️ Robust Error Handling** - All applications handle edge cases gracefully
 2. **📱 User-Friendly Interface** - Clear prompts and intuitive navigation
-3. **💾 Data Persistence** - Contact Vault and Cine Archive maintain data between sessions
+3. **💾 Data Persistence** - Contact Vault, Cine Archive, and Weather Logger maintain data between sessions
 4. **📊 Comprehensive Analysis** - Grade Insight provides detailed statistics
-5. **🚀 Zero Dependencies** - Pure Python standard library implementation
+5. **🚀 Minimal Dependencies** - Pure Python standard library implementation (except Weather Logger)
 6. **🎨 Professional Presentation** - Clean formatting and visual enhancements
 7. **🔍 Smart Search** - Cine Archive offers partial matching capabilities
 8. **⭐ Input Validation** - Rating validation in Cine Archive (0-10 range)
 
-## � Educational Value
+## 📚 Educational Value
 
 ### Learning Outcomes
 - 📚 **File I/O Operations** - CSV and JSON file handling
-- � **Data Structures** - Dictionaries, lists, and arrays
-- �️ **Error Handling** - Try-catch blocks and validation
+- 📖 **Data Structures** - Dictionaries, lists, and arrays
+- 🛡️ **Error Handling** - Try-catch blocks and validation
 - 🎮 **CLI Development** - Menu-driven interfaces
-- � **Data Persistence** - File-based storage systems
-- � **Search Algorithms** - Case-insensitive partial matching
+- 💾 **Data Persistence** - File-based storage systems
+- 🔍 **Search Algorithms** - Case-insensitive partial matching
 
 ### Code Quality Features
-- � **Clear Documentation** - Comprehensive docstrings
+- 📖 **Clear Documentation** - Comprehensive docstrings
 - 🏗️ **Modular Design** - Separate functions for each feature
-- � **Consistent Patterns** - Similar structure across applications
+- 📏 **Consistent Patterns** - Similar structure across applications
 - 🎯 **Single Responsibility** - Each function has one clear purpose
 
 ---
 
-*Built with ❤️ using Python's standard library - No external dependencies required!*
+*Built with ❤️ using Python's standard library - Minimal dependencies required!*
 
 **🎯 Perfect for educational purposes, personal productivity, and learning Python CLI development!**
