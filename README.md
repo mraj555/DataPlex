@@ -5,10 +5,11 @@
 ![Storage](https://img.shields.io/badge/Storage-CSV%20%26%20JSON-yellow.svg)
 ![Database](https://img.shields.io/badge/Database-Local%20File%20Storage-green.svg)
 ![Education](https://img.shields.io/badge/Purpose-Educational-red.svg)
+![Visualization](https://img.shields.io/badge/Features-Data%20Visualization-purple.svg)
 
 ## 📋 Overview
 
-**DataPlex** is a collection of sleek, command-line applications built with Python for managing contacts, student grades, movies, and weather data. Each application provides a simple yet powerful interface with persistent storage and intuitive user experiences.
+**DataPlex** is a collection of sleek, command-line applications built with Python for managing contacts, student grades, movies, weather data, and data visualization. Each application provides a simple yet powerful interface with persistent storage and intuitive user experiences.
 
 ## 🎯 Applications Overview
 
@@ -17,7 +18,8 @@
 | 🫙 **Contact Vault** | Contact Management | Add, View, Search contacts | ✅ Complete |
 | 📊 **Grade Insight** | Student Grade Analysis | Collect grades, Generate reports | ✅ Complete |
 | 🎬 **Cine Archive** | Movie Collection Manager | Add, View, Search movies | ✅ Complete |
-| 🌤️ **Weather Logger** | Weather Data Tracker | Log weather, API integration | 🚧 Development |
+| 🌤️ **Weather Logger** | Weather Data Tracker | Log weather, API integration | ✅ Complete |
+| � **Graph Craft** | Data Visualization | Weather charts & graphs | ✅ Complete |
 
 ## 🏗️ Project Architecture
 
@@ -28,6 +30,7 @@ DataPlex/
 ├── 📊 01_grade_insight.py    # Student grade analyzer
 ├── 🎬 02_cine_archieve.py    # Movie collection manager
 ├── 🌤️ 03_temp_trail.py      # Weather logging system
+├── 📈 04_graph_craft.py      # Data visualization tool
 ├── 📄 contacts.csv           # Contact storage (auto-generated)
 ├── 📄 movies.json            # Movie database (auto-generated)
 ├── 📄 weather.csv            # Weather logs (auto-generated)
@@ -261,7 +264,7 @@ def search_movie(movies):
 - 🌈 **Weather Conditions** - Store weather conditions along with temperature
 - 💾 **CSV Storage** - Persistent weather data storage
 
-### � Technical Implementation
+### 🔧 Technical Implementation
 
 #### **Data Layer** (`weather.csv`)
 - **Format**: CSV with UTF-8 encoding
@@ -278,6 +281,8 @@ Date,City,Temperature,Condition
 | Function | Purpose | Key Features |
 |----------|---------|--------------|
 | `log_weather()` | Fetch and log weather data | API integration, duplicate prevention |
+| `view_logs()` | Display weather history | CSV reading, formatted output |
+| `main()` | CLI interface | Menu-driven navigation |
 
 #### 🌡️ Weather API Integration
 ```python
@@ -300,7 +305,48 @@ def log_weather():
         print(f"🌤️ Temperature in {city} on {date}: {temp}°C — {condition} 🌈")
 ```
 
-## �📊 Application Flow Diagrams
+## 📈 Graph Craft - Data Visualization Tool
+
+### 🎯 Core Features
+- 📊 **Temperature Trends** - Line chart of daily temperature changes
+- 📋 **Weather Condition Analysis** - Bar chart of condition frequencies
+- 📈 **Matplotlib Integration** - Professional chart generation
+- 🎨 **Interactive Charts** - Zoom, pan, and save capabilities
+
+### 🔧 Technical Implementation
+
+#### **Data Processing**
+- **Input**: `weather.csv` file
+- **Output**: Interactive matplotlib charts
+- **Libraries**: `matplotlib.pyplot`, `collections.defaultdict`
+
+#### **Core Functions**
+
+| Function | Purpose | Key Features |
+|----------|---------|--------------|
+| `visualize_weather()` | Generate weather charts | Temperature trends, condition frequency |
+
+#### 📊 Chart Generation
+```python
+def visualize_weather():
+    # Lists to store dates and temperatures for the line chart
+    dates = []
+    temps = []
+    # Dictionary to count how many times each weather condition occurs
+    conditions = defaultdict(int)
+
+    # Create and display a line chart of daily temperatures
+    plt.figure(figsize=(10, 7))
+    plt.plot(dates, temps, marker="o")
+    plt.title("Daily Temperature Trends")
+    plt.xlabel("Date")
+    plt.ylabel("Temperature (°C)")
+    plt.tight_layout()
+    plt.grid(True)
+    plt.show()
+```
+
+## 📊 Application Flow Diagrams
 
 ### 🫙 Contact Vault Flow
 ```
@@ -342,7 +388,7 @@ def log_weather():
           ▼
 ┌─────────────────────────────┐
 │  Generate Report            │
-│  📊 Statistics + Analysis │
+│  📊 Statistics + Analysis   │
 └─────────┬───────────────────┘
           │
           ▼
@@ -386,7 +432,13 @@ def log_weather():
 
 ### Prerequisites
 - **Python 3.x** installed on your system
-- **No external dependencies** required (uses standard library only)
+- **External dependencies**: `requests`, `matplotlib` (for Weather Logger and Graph Craft)
+
+### Installation
+```bash
+# Install required packages
+pip install requests matplotlib
+```
 
 ### Running the Applications
 
@@ -410,21 +462,26 @@ python 02_cine_archieve.py
 python 03_temp_trail.py
 ```
 
+#### Graph Craft
+```bash
+python 04_graph_craft.py
+```
+
 ## 📈 Technical Specifications
 
-| Aspect | Contact Vault | Grade Insight | Cine Archive | Weather Logger |
-|--------|---------------|---------------|--------------|----------------|
-| **Language** | Python 3.x | Python 3.x | Python 3.x | Python 3.x |
-| **Storage** | CSV File | In-memory Dictionary | JSON File | CSV File |
-| **Encoding** | UTF-8 | UTF-8 | UTF-8 | UTF-8 |
-| **Interface** | Command Line | Command Line | Command Line | Command Line |
-| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only | `requests` |
-| **Platform** | Cross-platform | Cross-platform | Cross-platform | Cross-platform |
+| Aspect | Contact Vault | Grade Insight | Cine Archive | Weather Logger | Graph Craft |
+|--------|---------------|---------------|--------------|----------------|-------------|
+| **Language** | Python 3.x | Python 3.x | Python 3.x | Python 3.x | Python 3.x |
+| **Storage** | CSV File | In-memory Dictionary | JSON File | CSV File | CSV File |
+| **Encoding** | UTF-8 | UTF-8 | UTF-8 | UTF-8 | UTF-8 |
+| **Interface** | Command Line | Command Line | Command Line | Command Line | Chart Display |
+| **Dependencies** | Standard Library Only | Standard Library Only | Standard Library Only | `requests` | `matplotlib` |
+| **Platform** | Cross-platform | Cross-platform | Cross-platform | Cross-platform | Cross-platform |
 
 ## 🎨 User Experience Features
 
 ### Visual Enhancements
-- 📱 **Emojis**: Visual indicators (`🫙`, `📊`, `🎬`, `🙎`, `📱`, `🍿`, `🎭`, `⭐`, `🌤️`)
+- 📱 **Emojis**: Visual indicators (`🫙`, `📊`, `🎬`, `🙎`, `📱`, `🍿`, `🎭`, `⭐`, `🌤️`, `📈`)
 - 📋 **Clear Formatting**: Consistent separators and spacing
 - 🎯 **Intuitive Menus**: Numbered options with clear labels
 - ⚡ **Quick Feedback**: Immediate response to user actions
@@ -488,10 +545,12 @@ Date,City,Temperature,Condition
 2. **📱 User-Friendly Interface** - Clear prompts and intuitive navigation
 3. **💾 Data Persistence** - Contact Vault, Cine Archive, and Weather Logger maintain data between sessions
 4. **📊 Comprehensive Analysis** - Grade Insight provides detailed statistics
-5. **🚀 Minimal Dependencies** - Pure Python standard library implementation (except Weather Logger)
+5. **🚀 Minimal Dependencies** - Pure Python standard library implementation (except Weather Logger and Graph Craft)
 6. **🎨 Professional Presentation** - Clean formatting and visual enhancements
 7. **🔍 Smart Search** - Cine Archive offers partial matching capabilities
 8. **⭐ Input Validation** - Rating validation in Cine Archive (0-10 range)
+9. **📈 Data Visualization** - Graph Craft provides interactive charts
+10. **🌐 API Integration** - Weather Logger connects to OpenWeatherMap
 
 ## 📚 Educational Value
 
@@ -502,6 +561,8 @@ Date,City,Temperature,Condition
 - 🎮 **CLI Development** - Menu-driven interfaces
 - 💾 **Data Persistence** - File-based storage systems
 - 🔍 **Search Algorithms** - Case-insensitive partial matching
+- 📊 **Data Visualization** - Matplotlib chart generation
+- 🌐 **API Integration** - HTTP requests and JSON parsing
 
 ### Code Quality Features
 - 📖 **Clear Documentation** - Comprehensive docstrings
